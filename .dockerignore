@@ -1,34 +1,11 @@
-# Ignore everything we don’t want copied into the container
-
-# --- Git / metadata ---
 .git
 .gitignore
-README.md
-LICENSE
-
-# --- OS / editor ---
+__pycache__/
+*.py[cod]
+*.log
+*.tmp
+*.swp
 .DS_Store
 .idea
 .vscode
-.Trash-*/
-
-# --- Local caches ---
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg-info/
-.venv
-.env
-*.log
-*.tmp
-
-# --- Notebooks & outputs ---
-# Keep notebook source but skip checkpoints and outputs
-notebooks/.ipynb_checkpoints/
-notebooks/.Trash-*/
-*.nbconvert.ipynb
-
-# --- Docker itself ---
-docker-compose.yml
-docker-data/
+notebooks/

@@ -1,16 +1,12 @@
 services:
-  notebook:
+  dashboard:
     build: .
-    container_name: occupancy-charts
+    container_name: occupancy-dashboard
     ports:
-      - "8888:8888"
+      - "8501:8501"
     volumes:
-      - ./notebooks:/app/notebooks
-    command: >
-      python -m notebook
-      --ip=0.0.0.0
-      --port=8888
-      --no-browser
-      --allow-root
-      --NotebookApp.token=''
-      --NotebookApp.password=''
+      - ./app.py:/app/app.py
+      - ./data:/app/data
+    environment:
+      - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+    restart: unless-stopped

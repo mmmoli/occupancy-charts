@@ -1,6 +1,6 @@
-jupyter
+streamlit
 pandas
 matplotlib
 seaborn
 plotly
-notebook
+numpy
