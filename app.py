@@ -3,31 +3,35 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from lib.i18n import t, Language
 
 # ---- App Header ----
 st.set_page_config(page_title="Occupancy Loss Calculator", page_icon="💸", layout="wide")
-st.title("💸 Revenue Loss Simulator")
-st.caption("Understand the hidden cost of tenant turnover")
+# Language selection
+language = st.sidebar.selectbox("Select Language", options=["en", "th"], format_func=lambda lang: "English" if lang == "en" else "ไทย")
+
+st.title(t("title", language))
+st.caption(t("caption", language))
 
 # ---- Inputs ----
-st.sidebar.header("Building Details")
-n_flats = st.sidebar.slider("Total number of rental units", 1, 200, 30)
-rent_per_month = st.sidebar.number_input("Monthly rent per unit (฿)", 3000, 50000, 5000, step=1000)
+st.sidebar.header(t("params_header", language))
+n_flats = st.sidebar.slider(t("flats", language), 1, 200, 30)
+rent_per_month = st.sidebar.number_input(t("rent", language), 3000, 50000, 5000, step=1000)
 
-st.sidebar.header("Tenant Turnover")
-let_duration = st.sidebar.number_input("Average Contract Duration (months)", 1, 36, 12)
-st.sidebar.markdown("#### Vacancy Breakdown")
-delay_inspection = st.sidebar.slider("Days for inspection", 0, 7, 2)
-delay_callout = st.sidebar.slider("Days waiting for maintenance", 0, 7, 1)
-delay_job_completion = st.sidebar.slider("Days to complete repairs", 0, 7, 1)
-delay_find_new_tenant = st.sidebar.slider("Days to find new tenant", 1, 90, 30)
+st.sidebar.header(t("params_header", language))
+tenants_renewing = st.sidebar.slider(t("flats", language), 0, n_flats, int(n_flats * 0.7))
+st.sidebar.markdown("#### " + t("turnover", language))
+delay_inspection = st.sidebar.slider(t("turnover", language) + " - Inspection", 0, 7, 2)
+delay_callout = st.sidebar.slider(t("turnover", language) + " - Maintenance", 0, 7, 1)
+delay_job_completion = st.sidebar.slider(t("turnover", language) + " - Repairs", 0, 7, 1)
+delay_find_new_tenant = st.sidebar.slider(t("turnover", language) + " - New Tenant", 1, 90, 30)
 turnover_days = delay_inspection + delay_callout + delay_job_completion + delay_find_new_tenant
 
 # Calculate churn rate and occupancy metrics
 days_in_year = 365
 rent_per_day = rent_per_month / 30
 total_days = n_flats * days_in_year
-churn_rate = (12 / let_duration) * 100
+churn_rate = ((n_flats - tenants_renewing) / n_flats) * 100
 
 # Occupancy calculations
 void_days = (churn_rate / 100) * turnover_days * n_flats
@@ -43,7 +47,7 @@ percentage_loss = (revenue_loss / theoretical_revenue) * 100
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.subheader("💰 Revenue Impact Visualization")
+    st.subheader(t("results_header", language))
 
     # Pie chart of revenue
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
@@ -84,17 +88,17 @@ with col2:
     """)
 
 # Detailed Metrics
-st.subheader("📊 Detailed Metrics")
+st.subheader(t("results_header", language))
 col3, col4, col5 = st.columns(3)
 
 with col3:
-    st.metric("Total Units", f"{n_flats}")
-    st.metric("Average Tenant Stay", f"{let_duration} months")
+    st.metric(t("flats", language), f"{n_flats}")
+    st.metric(t("churn", language), f"{tenants_renewing} out of {n_flats}")
 
 with col4:
-    st.metric("Annual Churn Rate", f"{churn_rate:.1f}%")
-    st.metric("Void Days per Year", f"{void_days:.0f}")
+    st.metric(t("churn", language), f"{churn_rate:.1f}%")
+    st.metric(t("void_days", language), f"{void_days:.0f}")
 
 with col5:
-    st.metric("Monthly Rent", f"฿{rent_per_month:,}")
-    st.metric("Effective Occupancy", f"{effective_occupancy_rate * 100:.2f}%")
+    st.metric(t("rent", language), f"฿{rent_per_month:,}")
+    st.metric(t("effective_occ", language), f"{effective_occupancy_rate * 100:.2f}%")

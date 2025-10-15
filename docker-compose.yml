@@ -6,6 +6,7 @@ services:
       - "8501:8501"
     volumes:
       - ./app.py:/app/app.py
+      - ./lib:/app/lib
       - ./data:/app/data
     environment:
       - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
