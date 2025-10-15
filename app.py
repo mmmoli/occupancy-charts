@@ -13,13 +13,21 @@ st.sidebar.header("Your Building Details")
 n_flats = st.sidebar.slider("Total number of rental units", 1, 200, 30)
 rent_per_month = st.sidebar.number_input("Monthly rent per unit (฿)", 3000, 8000, 5000, step=1000)
 
-# More intuitive churn rate inputs
-st.sidebar.markdown("### Tenant Turnover")
-avg_tenant_stay = st.sidebar.slider("Average tenant stay (months)", 6, 36, 12)
-turnover_days = st.sidebar.slider("Average days to prepare unit between tenants", 0, 60, 15)
+st.sidebar.header("Tenants")
+let_duration = st.sidebar.number_input("Contract Duration (months)", 1, 36, 12)
+st.sidebar.markdown(
+'''
+#### Tenant Turnover
+Once the tenant moves out…
+''')
+delay_inspection = st.sidebar.slider("Average days to conduct inspection", 0, 7, 2)
+delay_callout = st.sidebar.slider("Average days to wait for callout", 0, 7, 1)
+delay_job_completion = st.sidebar.slider("Average days to complete repair work", 0, 7, 1)
+delay_find_new_tenant = st.sidebar.slider("Average days to find new tenant", 1, 30 * 3, 30)
+turnover_days = delay_inspection + delay_callout + delay_job_completion + delay_find_new_tenant
 
 # Calculate churn rate based on tenant stay
-churn_rate = (12 / avg_tenant_stay) * 100
+churn_rate = (12 / let_duration) * 100
 
 # ---- Calculations ----
 days_in_year = 365
@@ -36,7 +44,7 @@ revenue = effective_occupancy_rate * total_days * rent_per_day
 st.subheader("📊 Results")
 st.markdown(f"""
 - **Total Units:** {n_flats}
-- **Average Tenant Stay:** {avg_tenant_stay} months
+- **Average Tenant Stay:** {let_duration} months
 - **Estimated Annual Churn Rate:** {churn_rate:.1f}%
 - **Effective Occupancy:** {effective_occupancy_rate * 100:.2f}%
 - **Void Days per Year:** {void_days:.0f}
