@@ -1,0 +1,16 @@
+services:
+  notebook:
+    build: .
+    container_name: occupancy-charts
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/app/notebooks
+    command: >
+      python -m notebook
+      --ip=0.0.0.0
+      --port=8888
+      --no-browser
+      --allow-root
+      --NotebookApp.token=''
+      --NotebookApp.password=''

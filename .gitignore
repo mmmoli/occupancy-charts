@@ -1,0 +1,46 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.env
+.venv/
+.envrc
+pip-log.txt
+*.egg
+*.manifest
+*.spec
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+.notebook_cache/
+# Optional: uncomment to ignore notebook outputs
+# *.ipynb
+
+# --- OS junk ---
+.DS_Store
+.Trash-*/
+Thumbs.db
+desktop.ini
+
+# --- Editor / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# --- Project files ---
+# Logs & temp data
+*.log
+*.tmp
+logs/
+tmp/
+cache/
+
+# --- Docker ---
+# (We track Dockerfile & compose, but not built artifacts)
+docker-data/
