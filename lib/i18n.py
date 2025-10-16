@@ -49,7 +49,11 @@ _translations = {
         "metric_annual_churn_rate": "Churn Rate",
         "metric_void_days_per_year": "Void days per year",
         "metric_monthly_rent": "Monthly Rent (£)",
-        "metric_effective_occupancy": "Effective Occupancy"
+        "metric_effective_occupancy": "Effective Occupancy",
+        "conclusion_heading": "Summary",
+        "conclusion_point_1": "Every vacant day costs you money",
+        "conclusion_point_2": "Reducing turnover time can significantly boost your revenue",
+        "conclusion_point_3": "Invest in tenant satisfaction and quick maintenance",
     },
     "th": {
         "building_name": "Building Name/Address",
@@ -99,6 +103,10 @@ _translations = {
         "title": "🏠 เครื่องจำลองอัตราการเข้าพัก",
         "total_span_loss": "ในระยะเวลา 3 ปี",
         "void_days": "Void Days per Year",
+        "conclusion_heading": "สรุป",
+        "conclusion_point_1": "ทุกวันที่ห้องว่างทำให้คุณต้องเสียเงิน",
+        "conclusion_point_2": "การลดระยะเวลาการหมุนเวียนสามารถเพิ่มรายได้ของคุณได้อย่างมาก",
+        "conclusion_point_3": "ลงทุนเพื่อความพึงพอใจของผู้เช่าและการบำรุงรักษาที่รวดเร็ว"
     },
 }
 

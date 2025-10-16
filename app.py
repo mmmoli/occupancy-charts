@@ -59,11 +59,11 @@ with col1:
     total_span_loss = revenue_loss * span_duration
     st.metric(t("total_span_loss", language), f"{t('currency_symbol', language)}{total_span_loss:,.0f}")
 
-    st.markdown("""
-    ### What This Means
-    - Every vacant day costs you money
-    - Reducing turnover time can significantly boost your revenue
-    - Invest in tenant satisfaction and quick maintenance
+    st.markdown(f"""
+    ### {t('conclusion_heading', language)}
+    - {t('conclusion_point_1', language)}
+    - {t('conclusion_point_2', language)}
+    - {t('conclusion_point_3', language)}
     """)
 
 with col2:
